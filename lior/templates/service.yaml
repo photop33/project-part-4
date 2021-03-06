@@ -4,9 +4,9 @@ metadata:
   name: test-service
 spec:
   selector:
-      app: hello-python3
+      app: lior_project
   type: LoadBalancer
   ports:
     - port: 6000
-      targetPort: 6000
+      targetPort: 5500
       protocol: "TCP"

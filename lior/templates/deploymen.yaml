@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: hello-python3
-        image: "photop/project-3":"${BUILD_NUMBER}"
+        image: "photop/project-3":"533"
         imagePullPolicy: Always
         ports:
         - containerPort: 5500

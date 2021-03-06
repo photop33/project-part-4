@@ -145,7 +145,7 @@ pipeline {
 	    steps{
                 script{
 		    bat 'python3 K8S_backend_testing.py'
-		    bat 'python3 succes K8S_backend_testing.py'
+		    bat 'echo succes K8S_backend_testing.py'
 		   }
                 }
 	    }

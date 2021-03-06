@@ -100,7 +100,7 @@ pipeline {
 	stage ('Deploy HM'){
             steps{
                 script{
-		    //bat 'helm repo list ' 
+		    bat 'helm repo list ' 
                     //bat 'helm install lior photop/project-3 --set image.version=photop33/project_4":${BUILD_NUMBER}"'
 		    //bat 'helm repo update'
                     //bat 'helm install itay itayzrihan1/helmproject --set image.version=itayzrihan/project3":${BUILD_NUMBER}"'

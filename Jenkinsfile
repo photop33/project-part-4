@@ -100,8 +100,9 @@ pipeline {
 	stage ('Deploy HM'){
             steps{
                 script{
+		    bat 'helm repo add lior https://photop33.github.io/Project3/lior'
 		    bat 'helm repo update' 
-		    bat 'helm install itay https://github.com/photop33/project_4/tree/master/my_chart.git --set image.version=photop/project-3:${BUILD_NUMBER}'
+                    bat 'helm install lior photop33/Project3 -set image.version=photop/project-3":${BUILD_NUMBER}"
 		    }  
                 }
             }			

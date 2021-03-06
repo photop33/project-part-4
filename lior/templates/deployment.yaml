@@ -13,6 +13,7 @@ spec:
         app: lior_project
     spec:
       containers:
+      - name: hello-python3
         image: "photop/project-3":"${BUILD_NUMBER}"
         imagePullPolicy: Always
         ports:

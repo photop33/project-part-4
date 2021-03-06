@@ -117,7 +117,7 @@ pipeline {
 	            //bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/service.yaml'
 		    //bat 'kubectl get deployments'  
 		    //bat 'kubectl get service'
-		    bat 'start/min minikube service test-service --url'
+		   // bat 'start/min minikube service test-service --url'
                     bat 'minikube service  test-service –url > k8s_url.txt' 
                     bat 'echo succes Deploy HELM'
 		    }  
@@ -146,13 +146,6 @@ pipeline {
                 script{
 		    bat 'python3 K8S_backend_testing.py'
 		    bat 'python3 succes K8S_backend_testing.py'
-		   }
-                }
-	    }
-	stage ('k8s_url'){
-            steps{
-                script{
-		    bat 'minikube service hello-python-service –url > k8s_url.txt'
 		   }
                 }
 	    }

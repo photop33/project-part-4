@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  lior:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-03-06T20:09:25.2606859+02:00"
+    description: A Helm chart for Kubernetes
+    digest: 543df59be80cd2d5eeef1af754c599a8c75e3e810546a3211c2fd9130dae2d55
+    name: lior
+    type: application
+    urls:
+    - https://github.com/photop33/Project3/lior-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-03-06T20:09:25.2596846+02:00"

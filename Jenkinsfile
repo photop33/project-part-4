@@ -100,12 +100,12 @@ pipeline {
 	stage ('Deploy HM'){
             steps{
                 script{
-		    bat 'helm repo list ' 
-                    bat 'helm install lior photop/project-3 --set image.version=photop33/project_4":${BUILD_NUMBER}"'
-		    bat 'helm repo update'
+		    //bat 'helm repo list ' 
+                    //bat 'helm install lior photop/project-3 --set image.version=photop33/project_4":${BUILD_NUMBER}"'
+		    //bat 'helm repo update'
                     //bat 'helm install itay itayzrihan1/helmproject --set image.version=itayzrihan/project3":${BUILD_NUMBER}"'
-		    bat 'helm repo add lior https://photop33.github.io/Project3/lior'
-		    bat 'helm repo update'
+		    //bat 'helm repo add lior https://photop33.github.io/Project3/lior'
+		    //bat 'helm repo update'
 		    }  
                 }
             }			
@@ -113,11 +113,12 @@ pipeline {
             steps{
                 script{
 		    bat 'minikube start'
-                    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/deployment.yaml'
-	            bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/service.yaml'
-		    bat 'kubectl get deployments'  
-		    bat 'kubectl get service'
-		    bat 'start/min minikube service test-service --url' 	
+                    //bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/deployment.yaml'
+	            //bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/service.yaml'
+		    //bat 'kubectl get deployments'  
+		    //bat 'kubectl get service'
+		    bat 'start/min minikube service test-service --url'
+		    bat 'minikube service test-service –url > k8s_url.txt'
                     bat 'echo succes Deploy HELM'
 		    }  
                 }

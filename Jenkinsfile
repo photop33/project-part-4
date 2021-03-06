@@ -101,7 +101,7 @@ pipeline {
             steps{
                 script{
 		    bat 'minikube start'
-                    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/deploymen.yaml'
+                    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/deployment.yaml'
 	            bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/service.yaml'
 		    bat 'kubectl get deployments'  
 		    bat 'kubectl get service'

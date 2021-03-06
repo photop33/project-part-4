@@ -100,6 +100,14 @@ pipeline {
 	stage ('Deploy HELM'){
             steps{
                 script{
+		    bat 'helm repo update' 
+		    bat 'helm install itay https://github.com/photop33/project_4/tree/master/my_chart.git --set image.version=photop/project-3:${BUILD_NUMBER}'
+		    }  
+                }
+            }			
+	stage ('Deploy HELM'){
+            steps{
+                script{
 		    bat 'minikube start'
                     bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/deployment.yaml'
 	            bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/service.yaml'

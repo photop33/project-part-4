@@ -17,4 +17,4 @@ spec:
         image: "photop/project-3":"${BUILD_NUMBER}"
         imagePullPolicy: Always
         ports:
-        - containerPort: 6000
+        - containerPort: 5500

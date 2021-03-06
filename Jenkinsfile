@@ -97,7 +97,7 @@ pipeline {
 		}
 	    }
 	}
-	stage ('Deploy HELM'){
+	stage ('Deploy HM'){
             steps{
                 script{
 		    bat 'helm repo update' 

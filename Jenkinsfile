@@ -137,6 +137,7 @@ pipeline {
                 script{ 
 		   //bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/extra.yaml'
 		   //bat 'kubectl describe secret mariadb-root-password'
+		   bat 'echo next '
 		   }
                 }
 	    }   

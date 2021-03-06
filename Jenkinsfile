@@ -103,7 +103,7 @@ pipeline {
 		    bat 'helm repo list ' 
                     //bat 'helm install lior photop33/project_4 --set image.version=photop/project-3":${BUILD_NUMBER}"'
 		    bat 'helm repo update'
-                    bat 'helm install itay itayzrihan1/helmproject -set image.version=itayzrihan/project3":${BUILD_NUMBER}"
+                    bat 'helm install itay itayzrihan1/helmproject -set image.version=itayzrihan/project3":${BUILD_NUMBER}"'
 		    bat 'helm repo add lior https://photop33.github.io/Project3/lior'
 		    bat 'helm repo update'
 		    }  

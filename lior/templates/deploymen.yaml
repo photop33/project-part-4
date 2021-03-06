@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-python3
+  name: lior_project
 spec:
   selector:
     matchLabels:
-      app: hello-python3
+      app: lior_project
   replicas: 5
   template:
     metadata:
       labels:
-        app: hello-python3
+        app: lior_project
     spec:
       containers:
-      - name: hello-python3
-        image: "photop/project-3":"533"
+      - name: lior_project
+        image: "photop/project-3":"${BUILD_NUMBER}"
         imagePullPolicy: Always
         ports:
         - containerPort: 5500

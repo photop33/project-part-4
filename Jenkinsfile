@@ -135,7 +135,7 @@ pipeline {
 	stage ('extra-mysql'){
 	    steps{
                 script{ 
-		    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/EXTRA-mysql/mysql-deployment.yaml'
+		    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/EXTRA-mysql/mysql-deployment2.yaml'
 		    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/EXTRA-mysql/mysql-pv.yaml'
 		    bat 'kubectl describe deployment mysql'
 		    bat 'kubectl get pods -l app=mysql'

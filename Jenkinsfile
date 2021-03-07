@@ -103,6 +103,7 @@ pipeline {
                     bat 'cd project-helm'
 		    bat 'helm install project --set image.repostitory=photop33/project3,image.tag=${BUILD_NUMBER} project-helm'
 		    bat 'helm repo update'
+		    bat 'helm list --all'
 		    }  
                 }
             }			

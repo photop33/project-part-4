@@ -101,7 +101,7 @@ pipeline {
             steps{
                 script{
                     bat 'cd project-helm'
-		    bat	'helm install project-4 --dry-run  --debug --set image.repostitory=photop33/Project3,image.tag=${BUILD_NUMBER} project-helm'
+		    bat	'helm install project-4-lior --dry-run  --debug --set image.repostitory=photop33/Project3,image.tag=${BUILD_NUMBER} project-helm'
 		    bat 'helm repo update'
 		    bat 'helm list --all'
 		    }  
@@ -110,8 +110,8 @@ pipeline {
 	 stage ('Deploy HELM'){
             steps{
                 script{
-                   bat """ start /min /b minikube service project-4 --url >  k8s_url-tmp.txt 
-		   ping -n 10 127.0.0.1
+                   bat """ start /min /b minikube service project-4-lior --url >  k8s_url-tmp.txt 
+		   ping -n 10 127.0.0.1 
                    (type  k8s_url-tmp.txt | findstr "^http") >  k8s_url.txt
                     type k8s_url.txt """
 

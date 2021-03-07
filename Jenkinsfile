@@ -129,7 +129,7 @@ pipeline {
 	stage ('extra-secret'){
 	    steps{
                 script{ 
-	            bat 'kubectl create secret generic project-4-secret --from-literal=usr=fFFGNbw0b0 --from-literal=pwd=66VHtH6ctH '
+	            bat 'start/min kubectl create secret generic project-4-secret --from-literal=usr=fFFGNbw0b0 --from-literal=pwd=66VHtH6ctH '
 		    bat 'kubectl get secrets '
 		    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/username.txt'
 		    bat 'kubectl get secret mysecret -o yaml'
@@ -155,7 +155,7 @@ pipeline {
 		    bat 'kubectl describe deployment mysql'
 		    bat 'kubectl get pods -l app=mysql'
 		    bat 'kubectl describe pvc mysql-pv-claim'
-		    bat 'kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword'
+		    bat 'start/min kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword'
 		    bat 'kubectl delete deployment,svc mysql'
                     bat 'kubectl delete pvc mysql-pv-claim'
                     bat 'kubectl delete pv mysql-pv-volume'

@@ -132,6 +132,16 @@ pipeline {
 		   }
                 } 
 	    }  
+	stage ('extra-secret'){
+	    steps{
+                script{ 
+		    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/username.txt'
+		    bat 'kubectl get secret mysecret -o yaml'
+		    bat 'kubectl get pod secret-envars-test-pod'
+		    bat 'echo succes secret'
+		   }
+                } 
+	    }  
 	stage ('extra.py'){
 	    steps{
                 script{ 

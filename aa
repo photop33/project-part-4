@@ -1,0 +1,121 @@
+
+C:\Users\l1313\.jenkins\workspace\Project-3>cd project-helm 
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>helm install project --dry-run --set image.repostitory=photop33/project3,image.tag=${BUILD_NUMBER} project-helm 
+NAME: project
+LAST DEPLOYED: Sun Mar  7 15:45:04 2021
+NAMESPACE: default
+STATUS: pending-install
+REVISION: 1
+HOOKS:
+---
+# Source: lior/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "project-lior-test-connection"
+  labels:
+    helm.sh/chart: lior-0.1.0
+    app.kubernetes.io/name: lior
+    app.kubernetes.io/instance: project
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['project-lior:5500']
+  restartPolicy: Never
+MANIFEST:
+---
+# Source: lior/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: project-lior
+  labels:
+    helm.sh/chart: lior-0.1.0
+    app.kubernetes.io/name: lior
+    app.kubernetes.io/instance: project
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: lior/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-lior
+  labels:
+    helm.sh/chart: lior-0.1.0
+    app.kubernetes.io/name: lior
+    app.kubernetes.io/instance: project
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 5500
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: lior
+    app.kubernetes.io/instance: project
+---
+# Source: lior/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-lior
+  labels:
+    helm.sh/chart: lior-0.1.0
+    app.kubernetes.io/name: lior
+    app.kubernetes.io/instance: project
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: lior
+      app.kubernetes.io/instance: project
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: lior
+        app.kubernetes.io/instance: project
+    spec:
+      serviceAccountName: project-lior
+      securityContext:
+        {}
+      containers:
+        - name: lior
+          securityContext:
+            {}
+          image: "photop33/Project3:${BUILD_NUMBER}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 5500
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
+
+NOTES:
+1. Get the application URL by running these commands:
+     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
+           You can watch the status of by running 'kubectl get --namespace default svc -w project-lior'
+  export SERVICE_IP=$(kubectl get svc --namespace default project-lior --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
+  echo http://$SERVICE_IP:5500

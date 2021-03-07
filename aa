@@ -1,24 +1,446 @@
+Started by user lior swisa
+Obtained Jenkinsfile from git https://github.com/photop33/Project3
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\Users\l1313\.jenkins\workspace\Project-3
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git.exe rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/photop33/Project3 # timeout=10
+Fetching upstream changes from https://github.com/photop33/Project3
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.30.0.windows.2'
+ > git.exe fetch --tags --force --progress -- https://github.com/photop33/Project3 +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/master^{commit}" # timeout=10
+Checking out Revision 9ad625533c0e834a45360282009c042bfcc0333f (refs/remotes/origin/master)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 9ad625533c0e834a45360282009c042bfcc0333f # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git.exe rev-list --no-walk d67f424e959c73791a61b4b17ded489dfaae2ce4 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (properties)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] properties
+[Pipeline] properties
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+ > git.exe rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/photop33/project3.git # timeout=10
+Fetching upstream changes from https://github.com/photop33/project3.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.30.0.windows.2'
+ > git.exe fetch --tags --force --progress -- https://github.com/photop33/project3.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/master^{commit}" # timeout=10
+Checking out Revision 9ad625533c0e834a45360282009c042bfcc0333f (refs/remotes/origin/master)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 9ad625533c0e834a45360282009c042bfcc0333f # timeout=10
+ > git.exe branch -a -v --no-abbrev # timeout=10
+ > git.exe branch -D master # timeout=10
+ > git.exe checkout -b master 9ad625533c0e834a45360282009c042bfcc0333f # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git.exe rev-list --no-walk d67f424e959c73791a61b4b17ded489dfaae2ce4 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (rest_app.py)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>start /min python rest_app.py 
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo success rest_app.py 
+success rest_app.py
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Backend_testing)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>python3 Backend_testing.py 
+{'status': 'ok', 'user added': 'Daniel', 'user id': '1'}
+{'status': 'ok', 'user name': 'Daniel'}
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo success Backend_testing 
+success Backend_testing
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (clean_environemnt-1)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>start/min python3 clean_environemnt.py 
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo success clean_environemnt-1 
+success clean_environemnt-1
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker image - locally)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>docker build -t "598" . 
+#1 [internal] load build definition from Dockerfile
+#1 sha256:6018d4d3eba14e2541ec46e1cdd78f3d1f1fcda881b83b15b79c5fbeea487451
+#1 transferring dockerfile: 32B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load .dockerignore
+#2 sha256:2ba3fd3cd40a49270828cd65d51b9a35ffa4265c952c809f35f55f33c1d6ada7
+#2 transferring context: 2B done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/python:3
+#3 sha256:659a837a58aa562a3c6a6b5c53816b5d57a6ee4f80575a2e3ee1f7e1a5483b44
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/library/python:3
+#4 sha256:c025c2da0d4d82d45d5f2a98b1f20c0a4531302b79db8d32af1dd6e94eee8fa3
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 sha256:997b22aedf39e31879667967bcb19c4c811b90cc0bc47d8a2670058e24478f02
+#5 transferring context: 68B done
+#5 DONE 0.0s
+
+#6 [2/4] COPY rest_app.py /
+#6 sha256:01e99f8617bad2065cd4b45ce0198ad65d8ae9e44a0dd4f86604eadb1fd109e9
+#6 CACHED
+
+#7 [3/4] ADD requirements.txt /
+#7 sha256:f51c6dc01f86cc90705e7cc9caf85883db9f861413a7515dee8b3767c39370e6
+#7 CACHED
+
+#8 [4/4] RUN pip install -r requirements.txt
+#8 sha256:e81e47d558ced553b563097729bfb1cbecc5f323b2ffaa4745942687a1f658b2
+#8 CACHED
+
+#9 exporting to image
+#9 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#9 exporting layers done
+#9 writing image sha256:815288a36f6ada704c9a27e85af463be7ae24ddd427889b15a3558665f96bbcb done
+#9 naming to docker.io/library/598 done
+#9 DONE 0.1s
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>start/min docker run "598" 
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (build and push image)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>docker build -t photop/project-3:598 . 
+#1 [internal] load build definition from Dockerfile
+#1 sha256:22283ce7db12311b6ed835404e9674f2c3922389e6a76db92f9601750e50c730
+#1 transferring dockerfile: 32B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 sha256:844bb9639c37133433f037485f18c2dc63403ae0dc3a6c6fa3073c411295f2af
+#2 transferring context: 2B done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/python:3
+#3 sha256:659a837a58aa562a3c6a6b5c53816b5d57a6ee4f80575a2e3ee1f7e1a5483b44
+#3 DONE 0.0s
+
+#4 [1/4] FROM docker.io/library/python:3
+#4 sha256:c025c2da0d4d82d45d5f2a98b1f20c0a4531302b79db8d32af1dd6e94eee8fa3
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 sha256:b5918861943cf6daa7414624c6a8e22285634ede987327176b6e12027b8082f1
+#5 transferring context: 68B done
+#5 DONE 0.0s
+
+#7 [3/4] ADD requirements.txt /
+#7 sha256:885e8a7aa71199764f43ad8669eed7ce495940f5112c6637d6ef76c7214bc375
+#7 CACHED
+
+#6 [2/4] COPY rest_app.py /
+#6 sha256:c1459b7e70e2b07bc41552c86caf850f0a7b3c4aa94335fb53edaca8c11c498d
+#6 CACHED
+
+#8 [4/4] RUN pip install -r requirements.txt
+#8 sha256:dab8c5ca15b2fd310f37dc7ffeedcda39f153ab185c2d1ef8a7e3c9c568f4a64
+#8 CACHED
+
+#9 exporting to image
+#9 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#9 exporting layers done
+#9 writing image sha256:815288a36f6ada704c9a27e85af463be7ae24ddd427889b15a3558665f96bbcb done
+#9 naming to docker.io/photop/project-3:598 done
+#9 DONE 0.1s
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withDockerRegistry
+Using the existing docker config file.Removing blacklisted property: authsRemoving blacklisted property: credsStore$ docker login -u photop -p ******** https://index.docker.io/v1/
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+Login Succeeded
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>docker tag photop/project-3:598 photop/project-3:598 
+[Pipeline] isUnix
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>docker push photop/project-3:598 
+The push refers to repository [docker.io/photop/project-3]
+d84bee9b841a: Preparing
+812212025b14: Preparing
+224e4f3a169b: Preparing
+7d999a918ae9: Preparing
+5b164865b353: Preparing
+302cf02dcc7c: Preparing
+e3d73f29c674: Preparing
+10bf86ff9f6a: Preparing
+da654bc8bc80: Preparing
+4ef81dc52d99: Preparing
+909e93c71745: Preparing
+7f03bfe4d6dc: Preparing
+10bf86ff9f6a: Waiting
+da654bc8bc80: Waiting
+4ef81dc52d99: Waiting
+e3d73f29c674: Waiting
+909e93c71745: Waiting
+7f03bfe4d6dc: Waiting
+d84bee9b841a: Layer already exists
+224e4f3a169b: Layer already exists
+7d999a918ae9: Layer already exists
+5b164865b353: Layer already exists
+812212025b14: Layer already exists
+10bf86ff9f6a: Layer already exists
+e3d73f29c674: Layer already exists
+4ef81dc52d99: Layer already exists
+302cf02dcc7c: Layer already exists
+da654bc8bc80: Layer already exists
+909e93c71745: Layer already exists
+7f03bfe4d6dc: Layer already exists
+598: digest: sha256:3345d8001f6544d18078e5c60d82df2bfa26584463f24cecb4c9adc7d42f74e4 size: 2842
+[Pipeline] }
+[Pipeline] // withDockerRegistry
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (set version)
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo IMAGE_TAG=598  1>.env 
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>more .env 
+IMAGE_TAG=598 
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (docker-compose)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>docker-compose up -d 
+Creating network "project-3_default" with the default driver
+Found orphan containers (project-3_mysql_1) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up.
+Creating project-3_mysql-db_1 ... 
+
+[1A[2K
+Creating project-3_mysql-db_1 ... [32mdone[0m
+[1BCreating project-3_project_1  ... 
+
+[1A[2K
+Creating project-3_project_1  ... [32mdone[0m
+[1B
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo success docker-compose 
+success docker-compose
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (docker_backend_testing)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>python3 docker_backend_testing.py 
+{'status': 'ok', 'user name': 'Daniel'}
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo success docker_backend_testing.py 
+success docker_backend_testing.py
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (docker-compose down & delete image)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>docker-compose down  
+Stopping project-3_project_1  ... 
+
+Stopping project-3_mysql-db_1 ... 
+
+[2A[2K
+Stopping project-3_project_1  ... [32mdone[0m
+[2B[1A[2K
+Stopping project-3_mysql-db_1 ... [32mdone[0m
+[1BFound orphan containers (project-3_mysql_1) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up.
+Removing project-3_project_1  ... 
+
+Removing project-3_mysql-db_1 ... 
+
+[1A[2K
+Removing project-3_mysql-db_1 ... [32mdone[0m
+[1B[2A[2K
+Removing project-3_project_1  ... [32mdone[0m
+[2BRemoving network project-3_default
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>docker image rm  598 
+Untagged: 598:latest
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo docker-compose down + delete image 
+docker-compose down + delete image
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (clean_environemnt-2)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>start/min python3 clean_environemnt.py 
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo success clean_environemnt-2 
+success clean_environemnt-2
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy HM)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
 
 C:\Users\l1313\.jenkins\workspace\Project-3>cd project-helm 
 [Pipeline] bat
 
-C:\Users\l1313\.jenkins\workspace\Project-3>helm install project --dry-run --set image.repostitory=photop33/project3,image.tag=${BUILD_NUMBER} project-helm 
-NAME: project
-LAST DEPLOYED: Sun Mar  7 15:45:04 2021
+C:\Users\l1313\.jenkins\workspace\Project-3>helm install project-4 --dry-run  --debug --set image.repostitory=photop33/Project3,image.tag=${BUILD_NUMBER} project-helm 
+install.go:173: [debug] Original chart version: ""
+install.go:190: [debug] CHART PATH: C:\Users\l1313\.jenkins\workspace\Project-3\project-helm
+
+NAME: project-4
+LAST DEPLOYED: Sun Mar  7 17:10:47 2021
 NAMESPACE: default
 STATUS: pending-install
 REVISION: 1
+USER-SUPPLIED VALUES:
+image:
+  repostitory: photop33/Project3
+  tag: ${BUILD_NUMBER}
+
+COMPUTED VALUES:
+affinity: {}
+autoscaling:
+  enabled: false
+  maxReplicas: 100
+  minReplicas: 1
+  targetCPUUtilizationPercentage: 80
+fullnameOverride: ""
+image:
+  pullPolicy: IfNotPresent
+  repository: photop33/Project3
+  repostitory: photop33/Project3
+  tag: ${BUILD_NUMBER}
+imagePullSecrets: []
+ingress:
+  annotations: {}
+  enabled: false
+  hosts:
+  - host: chart-example.local
+    paths: []
+  tls: []
+nameOverride: ""
+nodeSelector: {}
+podAnnotations: {}
+podSecurityContext: {}
+replicaCount: 5
+resources: {}
+securityContext: {}
+service:
+  port: 5500
+  type: LoadBalancer
+serviceAccount:
+  annotations: {}
+  create: true
+  name: ""
+tolerations: []
+
 HOOKS:
 ---
 # Source: lior/templates/tests/test-connection.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "project-lior-test-connection"
+  name: "project-4-lior-test-connection"
   labels:
     helm.sh/chart: lior-0.1.0
     app.kubernetes.io/name: lior
-    app.kubernetes.io/instance: project
+    app.kubernetes.io/instance: project-4
     app.kubernetes.io/version: "1.16.0"
     app.kubernetes.io/managed-by: Helm
   annotations:
@@ -28,7 +450,7 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['project-lior:5500']
+      args: ['project-4-lior:5500']
   restartPolicy: Never
 MANIFEST:
 ---
@@ -36,11 +458,11 @@ MANIFEST:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: project-lior
+  name: project-4-lior
   labels:
     helm.sh/chart: lior-0.1.0
     app.kubernetes.io/name: lior
-    app.kubernetes.io/instance: project
+    app.kubernetes.io/instance: project-4
     app.kubernetes.io/version: "1.16.0"
     app.kubernetes.io/managed-by: Helm
 ---
@@ -48,11 +470,11 @@ metadata:
 apiVersion: v1
 kind: Service
 metadata:
-  name: project-lior
+  name: project-4-lior
   labels:
     helm.sh/chart: lior-0.1.0
     app.kubernetes.io/name: lior
-    app.kubernetes.io/instance: project
+    app.kubernetes.io/instance: project-4
     app.kubernetes.io/version: "1.16.0"
     app.kubernetes.io/managed-by: Helm
 spec:
@@ -64,17 +486,17 @@ spec:
       name: http
   selector:
     app.kubernetes.io/name: lior
-    app.kubernetes.io/instance: project
+    app.kubernetes.io/instance: project-4
 ---
 # Source: lior/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: project-lior
+  name: project-4-lior
   labels:
     helm.sh/chart: lior-0.1.0
     app.kubernetes.io/name: lior
-    app.kubernetes.io/instance: project
+    app.kubernetes.io/instance: project-4
     app.kubernetes.io/version: "1.16.0"
     app.kubernetes.io/managed-by: Helm
 spec:
@@ -82,14 +504,14 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: lior
-      app.kubernetes.io/instance: project
+      app.kubernetes.io/instance: project-4
   template:
     metadata:
       labels:
         app.kubernetes.io/name: lior
-        app.kubernetes.io/instance: project
+        app.kubernetes.io/instance: project-4
     spec:
-      serviceAccountName: project-lior
+      serviceAccountName: project-4-lior
       securityContext:
         {}
       containers:
@@ -116,6 +538,292 @@ spec:
 NOTES:
 1. Get the application URL by running these commands:
      NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch the status of by running 'kubectl get --namespace default svc -w project-lior'
-  export SERVICE_IP=$(kubectl get svc --namespace default project-lior --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
+           You can watch the status of by running 'kubectl get --namespace default svc -w project-4-lior'
+  export SERVICE_IP=$(kubectl get svc --namespace default project-4-lior --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
   echo http://$SERVICE_IP:5500
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>helm repo update 
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "project" chart repository
+...Successfully got an update from the "test" chart repository
+...Successfully got an update from the "lior" chart repository
+...Successfully got an update from the "traefik-mesh" chart repository
+...Successfully got an update from the "jenkins" chart repository
+...Successfully got an update from the "bitnami" chart repository
+...Successfully got an update from the "stable" chart repository
+Update Complete. ג�ˆHappy Helming!ג�ˆ
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>helm list --all 
+NAME      	NAMESPACE	REVISION	UPDATED                              	STATUS  	CHART       	APP VERSION
+my-release	default  	1       	2021-03-06 22:49:42.0044355 +0200 IST	deployed	apache-8.3.2	2.4.46     
+project   	default  	1       	2021-03-07 16:03:17.6745643 +0200 IST	deployed	lior-0.1.0  	1.16.0     
+project-4 	default  	1       	2021-03-07 16:19:44.7139055 +0200 IST	deployed	lior-0.1.0  	1.16.0     
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy HELM)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>minikube start 
+* minikube v1.17.1 on Microsoft Windows 10 Home 10.0.19041 Build 19041
+* Using the docker driver based on existing profile
+* Starting control plane node minikube in cluster minikube
+* Updating the running docker "minikube" container ...
+* Found network options:
+  - NO_PROXY=192.168.99.100
+  - no_proxy=192.168.99.100
+* Preparing Kubernetes v1.20.2 on Docker 20.10.2 ...| WW[K[K
+  - env NO_PROXY=192.168.99.100
+* Verifying Kubernetes components...
+* Enabled addons: storage-provisioner, dashboard, default-storageclass
+
+! C:\Windows\system32\kubectl.exe is version 1.14.0, which may have incompatibilites with Kubernetes 1.20.2.
+  - Want kubectl v1.20.2? Try 'minikube kubectl -- get pods -A'
+* Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>cd project-helm 
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>start/min minikube service project-4 --url  1>k8s_url.txt 
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>type k8s_url.txt 
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo succes Deploy HELM 
+succes Deploy HELM
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (K8S_backend_testing.py)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>python3 K8S_backend_testing.py 
+{'status': 'ok', 'user name': 'Daniel'}
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo succes K8S_backend_testing.py 
+succes K8S_backend_testing.py
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (extra-secret)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>start/min kubectl create secret generic project-4-secret --from-literal=usr=fFFGNbw0b0 --from-literal=pwd=66VHtH6ctH  
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>kubectl get secrets  
+NAME                               TYPE                                  DATA   AGE
+default-token-k2bxp                kubernetes.io/service-account-token   3      12d
+mysecret                           Opaque                                1      47h
+project-4-lior-token-8wbsj         kubernetes.io/service-account-token   3      51m
+project-4-secret                   Opaque                                2      7m54s
+project-4-secret-db                Opaque                                2      16m
+project-lior-token-hvv5d           kubernetes.io/service-account-token   3      67m
+sample-db-secret                   Opaque                                2      2d3h
+secret-basic-auth                  kubernetes.io/basic-auth              2      2d
+secret-tiger-docker                kubernetes.io/dockerconfigjson        1      47h
+sh.helm.release.v1.my-release.v1   helm.sh/release.v1                    1      18h
+sh.helm.release.v1.project-4.v1    helm.sh/release.v1                    1      51m
+sh.helm.release.v1.project.v1      helm.sh/release.v1                    1      67m
+test-secret                        Opaque                                2      2d5h
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/username.txt 
+secret/mysecret configured
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>kubectl get secret mysecret -o yaml 
+apiVersion: v1
+data:
+  config.yaml: YXBpVXJsOiAiaHR0cHM6Ly9sb2NhbGhvc3Q6NTUwMC91c2VyLzEiCnVzZXJuYW1lOiBsaW9yCnBhc3N3b3JkOiAxMjM0Cg==
+kind: Secret
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Secret","metadata":{"annotations":{},"name":"mysecret","namespace":"default"},"stringData":{"config.yaml":"apiUrl: \"https://localhost:5500/user/1\"\nusername: lior\npassword: 1234\n"},"type":"Opaque"}
+  creationTimestamp: "2021-03-05T15:44:44Z"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:config.yaml: {}
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+      f:type: {}
+    manager: kubectl
+    operation: Update
+    time: "2021-03-05T15:44:44Z"
+  name: mysecret
+  namespace: default
+  resourceVersion: "48984"
+  uid: 07b50d67-a1a4-4a1d-93ff-e33ff5077ad7
+type: Opaque
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>kubectl get pod secret-envars-test-pod 
+NAME                     READY   STATUS    RESTARTS   AGE
+secret-envars-test-pod   1/1     Running   5          2d5h
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo succes secret 
+succes secret
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (extra config-map)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo next config-map  
+next config-map 
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (extra-mysql)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/EXTRA-mysql/mysql-deployment2.yaml 
+service/mysql unchanged
+deployment.apps/mysql unchanged
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/EXTRA-mysql/mysql-pv.yaml 
+persistentvolume/mysql-pv-volume unchanged
+persistentvolumeclaim/mysql-pv-claim unchanged
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>kubectl describe deployment mysql 
+Name:               mysql
+Namespace:          default
+CreationTimestamp:  Sun, 07 Mar 2021 14:38:13 +0200
+Labels:             <none>
+Annotations:        deployment.kubernetes.io/revision: 1
+                    kubectl.kubernetes.io/last-applied-configuration:
+                      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"mysql","namespace":"default"},"spec":{"selector":{"matchL...
+Selector:           app=mysql
+Replicas:           1 desired | 1 updated | 1 total | 0 available | 1 unavailable
+StrategyType:       Recreate
+MinReadySeconds:    0
+Pod Template:
+  Labels:  app=mysql
+  Containers:
+   mysql:
+    Image:      mysql:5.6
+    Port:       3306/TCP
+    Host Port:  0/TCP
+    Environment:
+      MYSQL_ROOT_PASSWORD:  password
+    Mounts:
+      /var/lib/mysql from mysql-persistent-storage (rw)
+  Volumes:
+   mysql-persistent-storage:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  mysql-pv-claim
+    ReadOnly:   false
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      False   MinimumReplicasUnavailable
+  Progressing    False   ProgressDeadlineExceeded
+OldReplicaSets:  <none>
+NewReplicaSet:   mysql-68579b78bb (1/1 replicas created)
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>kubectl get pods -l app=mysql 
+NAME                     READY   STATUS    RESTARTS   AGE
+mysql-68579b78bb-mzggf   0/1     Pending   0          153m
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>kubectl describe pvc mysql-pv-claim 
+Name:          mysql-pv-claim
+Namespace:     default
+StorageClass:  manual
+Status:        Pending
+Volume:        
+Labels:        <none>
+Annotations:   kubectl.kubernetes.io/last-applied-configuration:
+                 {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{},"name":"mysql-pv-claim","namespace":"default"},"spec":{"acc...
+Finalizers:    [kubernetes.io/pvc-protection]
+Capacity:      
+Access Modes:  
+VolumeMode:    Filesystem
+Mounted By:    mysql-68579b78bb-mzggf
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>start/min kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword 
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>kubectl delete deployment,svc mysql 
+deployment.apps "mysql" deleted
+service "mysql" deleted
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>kubectl delete pvc mysql-pv-claim 
+persistentvolumeclaim "mysql-pv-claim" deleted
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>kubectl delete pv mysql-pv-volume 
+persistentvolume "mysql-pv-volume" deleted
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (clean_environemnt-3)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>start/min python3 clean_environemnt.py 
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>echo success clean_environemnt-3 
+success clean_environemnt-3
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] bat
+
+C:\Users\l1313\.jenkins\workspace\Project-3>docker rmi photop/project-3:598 
+Untagged: photop/project-3:598
+Untagged: photop/project-3@sha256:3345d8001f6544d18078e5c60d82df2bfa26584463f24cecb4c9adc7d42f74e4
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline

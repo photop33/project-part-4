@@ -118,17 +118,6 @@ pipeline {
 		    }  
                 }
             }
-	stage ('Deploy HEL'){
-            steps{
-                script{
-		    bat 'minikube start'
-		    bat 'cd project-helm'
-		    bat  'minikube service project-4 --url > k8s_url.txt  '
-                    bat 'type k8s_url.txt' 
-                    bat 'echo succes Deploy HELM'
-		    }  
-                }
-            }
 	stage ('K8S_backend_testing.py'){
 	    steps{
                 script{

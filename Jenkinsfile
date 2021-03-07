@@ -132,7 +132,7 @@ pipeline {
 		   }
                 } 
 	    }  
-	stage ('extra-secret'){
+	stage ('extra-mysql'){
 	    steps{
                 script{ 
 		    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/EXTRA-mysql/mysql-deployment.yaml'

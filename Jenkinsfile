@@ -114,6 +114,7 @@ pipeline {
 		    bat 'minikube start'
                     //bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/deployment.yaml'
 	            //bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/service.yaml'
+		    bat 'cd project-helm'
 		    bat 'start/min minikube service test-service --url > k8s_url.txt  '
 		    bat 'start/min minikube service project/project-helm  --url > k8s_url.txt'
                     bat 'type k8s_url.txt' 

@@ -106,7 +106,21 @@ pipeline {
 		    bat 'helm list --all'
 		    }  
                 }
-            }			
+            }
+	 stage ('Deploy HELM'){
+            steps{
+                script{
+			bat """
+                    start /min /b minikube service project-4 --url >  k8s_url-tmp.txt
+                    sleep 10
+                    (type  k8s_url-tmp.txt | findstr "^http") >  k8s_url.txt
+                    type k8s_url.txt
+                    set PYTHONPATH=%PYTHONPATH%;${pkgs_dir}
+                    ${py} k8s_backend_testing.py
+                """
+		    }  
+                }
+            }
 	stage ('Deploy HELM'){
             steps{
                 script{

@@ -122,7 +122,7 @@ pipeline {
                 script{
 		    bat 'minikube start'
 		    bat 'cd project-helm'
-		    bat 'start/min minikube service project-4 --url > k8s_url.txt  '
+		    bat  'minikube service project-4 --url > k8s_url.txt  '
                     bat 'type k8s_url.txt' 
                     bat 'echo succes Deploy HELM'
 		    }  

@@ -167,6 +167,7 @@ pipeline {
                     bat 'start/min python3 clean_environemnt.py'
                     bat 'echo success clean_environemnt-3'
 	            bat 'helm delete project-4 '
+	            bat 'helm delete project '
                     bat 'del k8s_url-test.txt'
                     bat 'del k8s_url.txt'
 		    bat 'helm list --all'

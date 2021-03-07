@@ -102,6 +102,7 @@ pipeline {
                 script{
                     bat 'cd project-helm'
 		    bat	'helm install project --debug --set image.repostitory=photop33/Project3,image.tag=${BUILD_NUMBER} project-helm'
+		    bat 'sleep 30s'
 		    bat 'helm repo update'
 		    bat 'helm list --all'
 		    }  

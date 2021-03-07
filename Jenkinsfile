@@ -110,11 +110,10 @@ pipeline {
 	 stage ('Deploy HELM'){
             steps{
                 script{
-                   bat """ start /min /b minikube service project-4-lior --url >  k8s_url-tmp.txt 
+                   bat """ start /min /b minikube service project-4-lior --url >  k8s_url-test.txt
 		   ping -n 10 127.0.0.1 
-                   (type  k8s_url-tmp.txt | findstr "^http") >  k8s_url.txt
-                    type k8s_url.txt """
-
+                   (type  k8s_url-test.txt | findstr "^http") >  k8s_url.txt
+                    type k8s_url.txt """		   
 		    }  
                 }
             }
@@ -167,6 +166,10 @@ pipeline {
                 script {
                     bat 'start/min python3 clean_environemnt.py'
                     bat 'echo success clean_environemnt-3'
+	            bat 'helm delete project-4 '
+                    bat 'del k8s_url-test.txt'
+                    bat 'del k8s_url.txt'
+		    bat 'helm list --all'
                    }
               }
           }

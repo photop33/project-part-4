@@ -110,8 +110,7 @@ pipeline {
 	 stage ('Deploy HELM'){
             steps{
                 script{
-                    bat 'start /min /b minikube service project-4 --url >  k8s_url-tmp.txt'
- 
+                   bat 'start /min /b minikube service project-4 --url >  k8s_url-tmp.txt'
                    bat (type  k8s_url-tmp.txt | findstr "^http") >  k8s_url.txt
                    bat  type k8s_url.txt
 

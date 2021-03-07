@@ -111,7 +111,7 @@ pipeline {
             steps{
                 script{
                    bat """ start /min /b minikube service project-4 --url >  k8s_url-tmp.txt 
-		   timeout /t 30 /nobreak
+		   ping -n 10 127.0.0.1
                    (type  k8s_url-tmp.txt | findstr "^http") >  k8s_url.txt
                     type k8s_url.txt """
 

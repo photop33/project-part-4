@@ -102,7 +102,7 @@ pipeline {
                 script{
 		    //bat 'helm create project-helm ' 
                     bat 'cd project-helm'
-		    bat 'helm install project --dry-run --debug --set image.repostitory=photop33/project3,image.tag=${BUILD_NUMBER} project-helm'
+		    bat 'helm install project --dry-run --set image.repostitory=photop33/project3,image.tag=${BUILD_NUMBER} project-helm'
 		    bat 'helm repo update'
 		    bat 'helm list'
 		    }  

@@ -135,10 +135,12 @@ pipeline {
 	stage ('extra-secret'){
 	    steps{
                 script{ 
-		    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/username.txt'
-		    bat 'kubectl get secret mysecret -o yaml'
-		    bat 'kubectl get pod secret-envars-test-pod'
-		    bat 'echo succes secret'
+		    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/EXTRA-mysql/mysql-deployment.yaml'
+		    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/EXTRA-mysql/mysql-pv.yaml'
+		    bat 'kubectl describe deployment mysql'
+		    bat 'kubectl get pods -l app=mysql'
+		    bat 'kubectl describe pvc mysql-pv-claim'
+		    bat 'kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword'
 		   }
                 } 
 	    }  

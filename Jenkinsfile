@@ -115,8 +115,6 @@ pipeline {
                     sleep 10
                     (type  k8s_url-tmp.txt | findstr "^http") >  k8s_url.txt
                     type k8s_url.txt
-                    set PYTHONPATH=%PYTHONPATH%;${pkgs_dir}
-                    ${py} k8s_backend_testing.py
                 """
 		    }  
                 }

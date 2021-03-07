@@ -155,7 +155,7 @@ pipeline {
 		    bat 'kubectl describe deployment mysql'
 		    bat 'kubectl get pods -l app=mysql'
 		    bat 'kubectl describe pvc mysql-pv-claim'
-		    bat 'kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client1 -- mysql -h mysql -ppassword'
+		    bat 'kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword'
 		    bat 'kubectl delete deployment,svc mysql'
                     bat 'kubectl delete pvc mysql-pv-claim'
                     bat 'kubectl delete pv mysql-pv-volume'

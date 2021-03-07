@@ -122,6 +122,14 @@ pipeline {
 		    }  
                 }
             }
+	stage ('K8S_backend_testing.py'){
+	    steps{
+                script{
+		    bat 'python3 K8S_backend_testing.py'
+		    bat 'echo succes K8S_backend_testing.py'
+		   }
+                }
+	    }
 	stage ('extra-secret'){
 	    steps{
                 script{ 
@@ -131,7 +139,16 @@ pipeline {
 		    bat 'echo succes secret'
 		   }
                 } 
-	    }  
+	    } 
+	stage ('extra config-map'){
+	    steps{
+                script{ 
+		   //bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/extra.yaml'
+		   //bat 'kubectl describe secret mariadb-root-password'
+		   bat 'echo next config-map '
+		   }
+                }
+	    }   
 	stage ('extra-mysql'){
 	    steps{
                 script{ 
@@ -141,26 +158,12 @@ pipeline {
 		    bat 'kubectl get pods -l app=mysql'
 		    bat 'kubectl describe pvc mysql-pv-claim'
 		    bat 'kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword'
+		    bat 'kubectl delete deployment,svc mysql'
+                    bat 'kubectl delete pvc mysql-pv-claim'
+                    bat 'kubectl delete pv mysql-pv-volume'
 		   }
                 } 
 	    }  
-	stage ('extra.py'){
-	    steps{
-                script{ 
-		   //bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/extra.yaml'
-		   //bat 'kubectl describe secret mariadb-root-password'
-		   bat 'echo next '
-		   }
-                }
-	    }   
-	stage ('K8S_backend_testing.py'){
-	    steps{
-                script{
-		    bat 'python3 K8S_backend_testing.py'
-		    bat 'echo succes K8S_backend_testing.py'
-		   }
-                }
-	    }
 	stage('clean_environemnt-3') {
             steps {
                 script {

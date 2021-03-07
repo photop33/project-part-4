@@ -102,11 +102,9 @@ pipeline {
                 script{
 		    bat 'helm create project-helm ' 
                     bat 'cd project-helm'
-			//bat 'helm install lior photop/project-3 --set image.version=photop33/project_4":${BUILD_NUMBER}"'
 		    bat 'helm install project --dry-run --debug --set image.repostitory=photop33/project3,image.tag=${BUILD_NUMBER} project-helm'
-                    //bat 'helm install itay itayzrihan1/helmproject --set image.version=itayzrihan/project3":${BUILD_NUMBER}"'
-		    //bat 'helm repo add lior https://photop33.github.io/Project3/lior'
-		    //bat 'helm repo update'
+		    bat 'helm repo update'
+		    bat 'helm list'
 		    }  
                 }
             }			
@@ -116,9 +114,8 @@ pipeline {
 		    bat 'minikube start'
                     //bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/deployment.yaml'
 	            //bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/service.yaml'
-		    //bat 'kubectl get deployments'  
-		    //bat 'kubectl get service'
-		    bat 'start/min minikube service test-service --url'
+		    bat 'minikube service list '  
+		    bat 'minikube service test-service --url > k8s_url.txt'
                     bat 'echo succes Deploy HELM'
 		    }  
                 }

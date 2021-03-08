@@ -84,7 +84,7 @@ pipeline {
             steps {
                 script{
                 bat 'docker-compose down '
-                bat "docker image rm  ${BUILD_NUMBER}"      		
+                bat "docker image rm  ${BUILD_NUMBER}"
                 bat 'echo docker-compose down + delete image'
                 }
             }
@@ -97,31 +97,38 @@ pipeline {
 		}
 	    }
 	}
-	stage ('Deploy HM'){
+	stage ('Deploy helm'){
             steps{
                 script{
-		    bat 'minikube start'
-                    bat 'cd project-helm'
-		    bat	'helm install project-4 --dry-run  --debug --set image.repostitory=photop33/Project3,image.tag=${BUILD_NUMBER} project-helm'
-		    bat 'helm repo update'
-		    bat 'helm list --all'
+                    bat """
+		          minikube start
+                          cd lior
+                          helm install test --debug --set image.repostitory=photop33/Project3,image.tag=${BUILD_NUMBER}  lior-0.1.0.tgz 
+		          //helm install project-4-lior --dry-run  --debug --set image.repostitory=photop33/Project3,image.tag=${BUILD_NUMBER} lior'
+		          helm list --all
+		          minikube service list 
+			  echo success Deploy helm
+		        """
 		    }  
                 }
             }
-	 stage ('Deploy HELM'){
+	 stage ('Deploy > k8s_url.txt'){
             steps{
                 script{
-                   bat """ start /min /b minikube service project-4-lior --url >  k8s_url-test.txt
-		   ping -n 10 127.0.0.1 
-                   (type  k8s_url-test.txt | findstr "^http") >  k8s_url.txt
-                    type k8s_url.txt """		   
+                   bat """ 
+		    start /min /b minikube service test-lior --url >  k8s_url-test.txt
+		    ping -n 10 127.0.0.1 
+                    (type  k8s_url-test.txt | findstr "^http") >  k8s_url.txt
+                    type k8s_url.txt
+		    echo success Deploy k8s_url.txt
+		    """		   
 		    }  
                 }
             }
 	stage ('K8S_backend_testing.py'){
 	    steps{
                 script{
-		    bat 'python3 K8S_backend_testing.py'
+		    bat 'start/min python3 K8S_backend_testing.py'
 		    bat 'echo succes K8S_backend_testing.py'
 		   }
                 }
@@ -133,7 +140,6 @@ pipeline {
 		    bat 'kubectl get secrets '
 		    bat 'kubectl apply -f https://raw.githubusercontent.com/photop33/Project3/master/lior/templates/username.txt'
 		    bat 'kubectl get secret mysecret -o yaml'
-		    bat 'kubectl get pod secret-envars-test-pod'
 		    bat 'echo succes secret'
 		   }
                 } 
@@ -156,21 +162,22 @@ pipeline {
 		    bat 'kubectl get pods -l app=mysql'
 		    bat 'kubectl describe pvc mysql-pv-claim'
 		    bat 'start/min kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h mysql -ppassword'
-		    bat 'kubectl delete deployment,svc mysql'
-                    bat 'kubectl delete pvc mysql-pv-claim'
-                    bat 'kubectl delete pv mysql-pv-volume'
+
 		   }
                 } 
 	    }  
 	stage('clean_environemnt-3') {
             steps {
                 script {
+		    bat 'helm list --all'
                     bat 'start/min python3 clean_environemnt.py'
                     bat 'echo success clean_environemnt-3'
-	            bat 'helm delete project-4 '
-	            bat 'helm delete project '
+	            bat 'helm delete test '
                     bat 'del k8s_url-test.txt'
                     bat 'del k8s_url.txt'
+		    bat 'kubectl delete deployment,svc mysql'
+                    bat 'kubectl delete pvc mysql-pv-claim'
+                    bat 'kubectl delete pv mysql-pv-volume'
 		    bat 'helm list --all'
                    }
               }

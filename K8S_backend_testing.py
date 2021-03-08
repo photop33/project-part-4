@@ -2,7 +2,7 @@ import requests
 user_id = "1"
 
 
-res = open (k8s_url-test,"r")
+res = open (k8s_url.txt ,"r")
 read = res.read()
 print (res)
 

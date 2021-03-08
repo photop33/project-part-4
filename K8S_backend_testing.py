@@ -5,7 +5,7 @@ user_id = "1"
 dic = open ('k8s_url.txt','r')
 read = dic.read()
 print (read)
-
+print (read,user_id)
 print (read,'/user/',user_id)
 
 

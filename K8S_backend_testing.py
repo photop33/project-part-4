@@ -7,7 +7,8 @@ read = dic.read()
 print (read)
 print (read,user_id)
 print (read,'/user/',user_id)
-
+url = "'+ read +'/user/' + user_id + ' "
+print (url)
 
 # res = requests.get( read "/user/" user_id )
 # if res.ok:

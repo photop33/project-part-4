@@ -6,9 +6,9 @@ dic = open ('k8s_url.txt','r')
 read = dic.read()
 print (read)
 
+print (read,user_id)
 
-
-res = requests.get('+ read +' + user_id + '')
+res = requests.get( ''read + user_id + '')
 if res.ok:
     print(res.json())
 

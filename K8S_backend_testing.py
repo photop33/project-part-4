@@ -8,7 +8,7 @@ url = ""+ read +"/user/"+ user_id +""
 
 print(url)
 
-res = requests.get( read "/user/" user_id )
+res = requests.get(url)
 if res.ok:
     print(res.json())
 

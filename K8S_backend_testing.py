@@ -8,11 +8,13 @@ url = ""+ read +"/user/"+ user_id +""
 
 print(url)
 
-res = requests.get(url)
+
+    
+res = requests.get('http://127.0.0.1:5500/user/' + user_id + '')
 if res.ok:
     print(res.json())
 
     
-res = requests.get('http://127.0.0.1:5500/user/' + user_id + '')
+res = requests.get(url)
 if res.ok:
     print(res.json())
